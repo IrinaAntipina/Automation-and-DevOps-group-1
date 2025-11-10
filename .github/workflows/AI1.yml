@@ -25,6 +25,15 @@ jobs:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v4
 
+      - name: Setup Python
+        uses: actions/setup-python@v4
+        with:
+        python-version: '3.11'
+
+      - name: Install dependencies
+        run: |
+          pip install pytest
+
       # Runs a single command using the runners shell
       - name: Run test_not_null.py
         run: pytest tests/test_not_null.py -v
