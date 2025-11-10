@@ -31,17 +31,12 @@ jobs:
             python-version: "3.11"
 
       - name: Install dependencies
-        run: |
-          pip install pytest
+        run: pip install pytest
 
       # Runs a single command using the runners shell
       - name: Run test_not_null.py
-        run: |
-          export PYTHONPATH="${PYTHONPATH}:$(pwd)
-          pytest tests/test_not_null.py -v
+        run: python -m pytest tests/test_not_null.py -v
 
       # Runs a set of commands using the runners shell
       - name: Run test_pandas.py
-        run: |
-          export PYTHONPATH="${PYTHONPATH}:$(pwd)
-          pytest tests/test_pandas.py -v
+        run: python -m pytest tests/test_pandas.py -v
