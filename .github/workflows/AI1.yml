@@ -31,7 +31,9 @@ jobs:
             python-version: "3.11"
 
       - name: Install dependencies
-        run: pip install pytest
+        run: |
+          pip install -r requirements.txt
+          pip install pytest
 
       # Runs a single command using the runners shell
       - name: Run test_not_null.py
