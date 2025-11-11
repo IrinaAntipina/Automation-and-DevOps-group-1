@@ -38,11 +38,18 @@ jobs:
 
         - name: logs
           if: ${{ github.event.inputs.log_errors == 'true' && steps.unit_tests.outcome == 'failure' }}
+          run: |
+            mkdir -p logs
+            echo "Tests failed!" >> logs/test-errors.log
+
+
+        - name: logs
+          if: ${{ github.event.inputs.log_errors == 'true' && steps.unit_tests.outcome == 'failure' }}
           uses: actions/upload-artifact@v3
           with: 
             name: test-error-logs-${{ github.run_number }}
             path: logs/test-errors.log
-          run: mkdir -p logs
+        
 
 
     build:
