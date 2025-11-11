@@ -89,10 +89,6 @@ jobs:
             app-name: ${{ secrets.AZURE_APP_NAME }}
             images: ${{ secrets.DOCKERHUB_USERNAME }}/weather-app:latest
 
-    open:
-      runs-on: ubuntu-latest
-      needs: build
-      steps:
-        - uses: azure/checkout@v4
+
 
 
