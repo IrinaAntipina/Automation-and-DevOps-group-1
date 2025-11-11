@@ -36,6 +36,14 @@ jobs:
         - name: Run test_pandas.py
           run: python -m pytest tests/test_pandas.py -v
 
+        - name: logs
+          if: ${{ github.event.inputs.log_errors == 'true' && steps.unit_tests.outcome == 'failure' }}
+          uses: actions/upload-artifact@v3
+          with: 
+            name: test-error-logs-${{ github.run_number }}
+            path: logs/test-errors.log
+          run: mkdir -p logs
+
 
     build:
       
@@ -73,3 +81,11 @@ jobs:
           with:
             app-name: ${{ secrets.AZURE_APP_NAME }}
             images: ${{ secrets.DOCKERHUB_USERNAME }}/weather-app:latest
+
+    open:
+      runs-on: ubuntu-latest
+      needs: build
+      steps:
+        - uses: azure/checkout@v4
+
+
