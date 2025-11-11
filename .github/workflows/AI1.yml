@@ -45,7 +45,7 @@ jobs:
 
         - name: logs
           if: ${{ github.event.inputs.log_errors == 'true' && steps.unit_tests.outcome == 'failure' }}
-          uses: actions/upload-artifact@v3
+          uses: actions/upload-artifact@v4
           with: 
             name: test-error-logs-${{ github.run_number }}
             path: logs/test-errors.log
