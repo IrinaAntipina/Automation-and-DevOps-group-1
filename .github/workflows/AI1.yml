@@ -39,20 +39,24 @@ jobs:
             pip install pytest
 
         - name: Run test_not_null.py
+          id: test_not_null
+          continue-on-error: true
           run: python -m pytest tests/test_not_null.py -v
 
         - name: Run test_pandas.py
+          id: test_pandas
+          continue-on-error: true
           run: python -m pytest tests/test_pandas.py -v
 
-        - name: logs
-          if: ${{ github.event.inputs.log_errors == 'true' && steps.unit_tests.outcome == 'failure' }}
+        - name: logs 
+          if: ${{ github.event.inputs.log_errors == 'true' && (steps.test_not_null.outcome == 'failure' || steps.test_pandas.outcome == 'failure') }}
           run: |
             mkdir -p logs
             echo "Tests failed!" >> logs/test-errors.log
 
 
-        - name: logs
-          if: ${{ github.event.inputs.log_errors == 'true' && steps.unit_tests.outcome == 'failure' }}
+        - name: logs file
+          if: ${{ github.event.inputs.log_errors == 'true' && (steps.test_not_null.outcome == 'failure' || steps.test_pandas.outcome == 'failure') }}
           uses: actions/upload-artifact@v4
           with: 
             name: test-error-logs-${{ github.run_number }}
