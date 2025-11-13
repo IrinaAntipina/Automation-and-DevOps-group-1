@@ -62,6 +62,9 @@ jobs:
             name: test-error-logs-${{ github.run_number }}
             path: logs/test-errors.log
         
+        - name: Fail if tests failed
+          if: steps.test_not_null.outcome == 'failure' || steps.test_pandas.outcome == 'failure'
+          run: exit 1
 
 
     build:
