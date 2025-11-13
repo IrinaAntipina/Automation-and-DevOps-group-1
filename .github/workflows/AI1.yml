@@ -11,14 +11,14 @@ on:
 
   workflow_dispatch:
     inputs:
-    log_errors:
-      description: 'Logs (true/false)'
-      required: true
-      type: choice
-      default: 'false'
-      options:
-        - 'true'
-        - 'false'
+      log_errors:
+        description: 'Logs (true/false)'
+        required: true
+        type: choice
+        default: 'false'
+        options:
+          - 'true'
+          - 'false'
 
 jobs:
 
